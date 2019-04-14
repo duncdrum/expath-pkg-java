@@ -15,14 +15,21 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import javax.xml.bind.JAXBException;
+
+
 import org.expath.pkg.repo.*;
+import org.xmlunit.builder.Input;
 
 import static org.junit.Assert.*;
+import static org.xmlunit.assertj.XmlAssert.assertThat;
+
 
 /**
  * Functional tests for package install.
  *
  * @author Florent Georges
+ * @author Duncan Paterson
  */
 public class InstallPackage
 {
@@ -45,13 +52,21 @@ public class InstallPackage
         // .expath-pkg/packages.txt
         Path expathPkgDir = repo_dir.resolve(".expath-pkg");
         Path packages_txt = expathPkgDir.resolve("packages.txt");
+
         assertTrue("the file .expath-pkg/packages.txt exist", Files.exists(packages_txt));
         assertEquals("the file .expath-pkg/packages.txt content", txt_content, readFile(packages_txt));
+
         // .expath-pkg/packages.xml
         Path packages_xml = expathPkgDir.resolve("packages.xml");
+
         assertTrue("the file .expath-pkg/packages.xml exist", Files.exists(packages_xml));
-        final String strPackages_xml = readFile(packages_xml).replaceAll("\r\n", "\n");
-        assertEquals("the file .expath-pkg/packages.xml content", xml_content, strPackages_xml);
+
+        final String strPackages_xml = readFile(packages_xml);
+        final Object test = Input.from(strPackages_xml).build();
+        final Object control = Input.from(xml_content).build();
+
+        assertThat(test).and(control).ignoreElementContentWhitespace().areIdentical();
+
         // content dir
         Path c_dir = repo_dir.resolve(content_dir);
         assertTrue("the content dir exist", Files.exists(c_dir));
