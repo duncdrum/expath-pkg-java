@@ -70,6 +70,8 @@ public class Packages
      * 
      * Note this does not implement the SemVer semantics (i.e. it does not try
      * to "match" a version pattern, it looks for an exact match, char by char).
+     * @param version version string
+     * @return a specific version of the package.
      */
     public Package version(String version)
     {

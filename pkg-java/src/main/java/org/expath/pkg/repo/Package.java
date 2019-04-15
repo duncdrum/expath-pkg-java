@@ -44,6 +44,10 @@ public class Package
 
     /**
      * {@code relative} is the filename relative to the module dir.
+     * @param href a uri
+     * @param relative filename relative to module dir
+     * @param space space
+     * @throws PackageException in case of any other error.
      */
     public void addPublicUri(URISpace space, String href, String relative)
             throws PackageException
@@ -157,7 +161,8 @@ public class Package
     }
 
     /**
-     * The package name.
+     * @return The package name.
+     *
      */
     public String getName()
     {
@@ -165,7 +170,7 @@ public class Package
     }
 
     /**
-     * The package abbrev.
+     * @return The package abbrev.
      */
     public String getAbbrev()
     {
@@ -173,7 +178,7 @@ public class Package
     }
 
     /**
-     * The package version.
+     * @return The package version.
      */
     public String getVersion()
     {
@@ -182,6 +187,8 @@ public class Package
 
     /**
      * Return the info object with the given name, null if there is no such info.
+     * @param name given name
+     * @return the info object
      */
     public PackageInfo getInfo(String name)
     {
@@ -190,7 +197,8 @@ public class Package
 
     /**
      * Set the info object for the given name.
-     *
+     * @param name given name
+     * @param info info object
      * @throws PackageException
      *      If there is already an info object with that name.
      */
@@ -205,6 +213,8 @@ public class Package
 
     /**
      * Set the info object for the given name.
+     * @param name given name
+     * @param info info object
      */
     public void setInfo(String name, PackageInfo info)
     {
@@ -212,7 +222,7 @@ public class Package
     }
 
     /**
-     * Return the dependencies on packages.
+     * @return Return the dependencies on packages.
      */
     public Collection<PkgDependency> getPackageDeps()
     {
@@ -221,6 +231,12 @@ public class Package
 
     /**
      * Add a dependency on a package.
+     * @param max max
+     * @param min min
+     * @param pkg pkg
+     * @param semver semver
+     * @param versions versions
+     * @throws PackageException in case of errors
      */
     public void addPackageDep(String pkg, String versions, String semver, String min, String max)
             throws PackageException
@@ -231,7 +247,7 @@ public class Package
     }
 
     /**
-     * Return the dependencies on processors.
+     * @return Return the dependencies on processors.
      */
     public Collection<ProcessorDependency> getProcessorDeps()
     {
@@ -240,6 +256,11 @@ public class Package
 
     /**
      * Add a dependency on a processor.
+     * @param max max
+     * @param min min
+     * @param proc proc
+     * @param semver semver
+     * @param versions versions
      */
     public void addProcessorDep(String proc, String versions, String semver, String min, String max)
     {

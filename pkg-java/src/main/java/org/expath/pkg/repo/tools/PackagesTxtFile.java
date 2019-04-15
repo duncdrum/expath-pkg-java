@@ -113,6 +113,9 @@ public class PackagesTxtFile
      * Return the names of all the package directories, as a set.
      * 
      * TODO: Cache them! (easy now, as all update go through this class)
+     *
+     * @return a set of names
+     * @throws PackageException in case of error
      */
     public Set<String> parseDirectories()
             throws PackageException
@@ -130,6 +133,10 @@ public class PackagesTxtFile
      * 
      * This is a utility method for systems where packages.txt is not stored as
      * an actual file (for instance on classpath storages).
+     *
+     * @param stream stream
+     * @throws PackageException in case of errors
+     * @return a set of names
      */
     public static Set<String> parseDirectories(InputStream stream)
             throws PackageException

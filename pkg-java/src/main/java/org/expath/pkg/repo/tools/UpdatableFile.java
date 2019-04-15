@@ -41,12 +41,16 @@ public abstract class UpdatableFile
      * By empty, means without any record.  If this is an XML file for instance,
      * it might have the root element.  No need to close the writer, it is done
      * automatically.
+     * @param out where
+     * @throws IOException in case of errors
      */
     protected abstract void createEmpty(Writer out)
             throws IOException;
 
     /**
      * Replace the actual file with {@code content}.
+     * @param content the content
+     * @throws PackageException in case of errors
      */
     protected void update(StringWriter content)
             throws PackageException

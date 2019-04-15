@@ -30,6 +30,12 @@ public class DescriptorParser
 {
     /**
      * Parse a package descriptor and build the corresponding {@link Package} object.
+     * @param desc desc
+     * @param repo repo
+     * @param rsrc_name a name
+     * @param storage storage
+     * @throws PackageException in case of errors
+     * @return package object
      */
     public Package parse(Source desc, String rsrc_name, Storage storage, Repository repo)
             throws PackageException

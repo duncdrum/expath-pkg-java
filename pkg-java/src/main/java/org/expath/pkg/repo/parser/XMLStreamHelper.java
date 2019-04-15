@@ -90,10 +90,7 @@ public class XMLStreamHelper
         if ( event != XMLStreamConstants.START_ELEMENT ) {
             return false;
         }
-        if ( ! new QName(myTargetNS, local_name).equals(parser.getName()) ) {
-            return false;
-        }
-        return true;
+        return new QName(myTargetNS, local_name).equals(parser.getName());
     }
 
     public void ensureElement(XMLStreamReader parser, String local_name)
@@ -186,6 +183,8 @@ public class XMLStreamHelper
      * The parser's current event must be START_ELEMENT.
      *
      * Ignore all this element end stops on the corresponding END_ELEMENT event.
+     * @param parser parser
+     * @throws PackageException in case of error
      */
     public void ignoreElement(XMLStreamReader parser)
             throws PackageException

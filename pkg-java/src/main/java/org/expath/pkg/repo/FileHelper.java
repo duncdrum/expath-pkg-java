@@ -32,6 +32,9 @@ public class FileHelper
      * 
      * Throw an error if the directory already exists and is not actually a
      * directory, or if there is an error creating it.
+     *
+     * @param dir a directory
+     * @throws PackageException in case of any other error.
      */
     public static void ensureDir(Path dir)
             throws PackageException
@@ -55,6 +58,12 @@ public class FileHelper
      * 
      * The new directory is empty, and its name is based on {@code prefix},
      * and on the current date after the prefix.
+     *
+     * @param parent the parent directory
+     *
+     * @param prefix prefix
+     * @throws PackageException in case of any other error.
+     * @return temporary file and dir
      */
     public static Path makeTempDir(final String prefix, final Path parent)
             throws PackageException
@@ -111,6 +120,7 @@ public class FileHelper
      * @param destination the destination file or directory
      *
      * @throws IOException if an error occurs whilst copying a file or directory
+     *
      */
     public static void copy(final Path source, final Path destination) throws IOException {
         if (!Files.isDirectory(source)) {
@@ -197,6 +207,7 @@ public class FileHelper
      * A list of the entries in the directory. The listing is not recursive.
      *
      * @param directory The directory to list the entries for
+     * @throws IOException if an error occurs whilst copying a file or directory
      *
      * @return The list of entries
      */

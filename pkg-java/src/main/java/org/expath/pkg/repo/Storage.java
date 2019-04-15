@@ -27,26 +27,30 @@ import javax.xml.transform.Source;
 public abstract class Storage
 {
     /**
-     * Return whether this storage is read-only.
+     * @return whether this storage is read-only.
      */
     public abstract boolean isReadOnly();
 
     /**
-     * Return a resolver for a specific package.
+     * @return a resolver for a specific package.
      *
-     * {@code rsrc_name} is the name of the resource representing the package.
+     * @param rsrc_name is the name of the resource representing the package.
      * For instance, on the filesystem that is the name of the root directory,
      * and in the classpath that is the name of the root package (in the Java
      * sense).
      *
-     * {@code abbrev} is the abbrev of the package (as in the package descriptor,
+     * @param abbrev is the abbrev of the package (as in the package descriptor,
      * and must match the module dir within the package).
+     *
+     * @throws PackageException in case of any other error.
      */
     public abstract PackageResolver makePackageResolver(String rsrc_name, String abbrev)
             throws PackageException;
 
     /**
-     * Return the list of installed packages.
+     * @return the list of installed packages.
+     *
+     * @throws PackageException in case of any other error.
      *
      * The returned list is the list of the package directories within the
      * repository.
@@ -59,12 +63,21 @@ public abstract class Storage
      * 
      * If installation is not supported (because the storage is read-only),
      * this method must throw an exception.
+     *
+     * @param force yes or no
+     * @param interact interact
+     *
+     * @throws PackageException in case of any other error.
      */
     public abstract void beforeInstall(boolean force, UserInteractionStrategy interact)
             throws PackageException;
 
     /**
      * TODO: ...
+     *
+     * @param prefix prefix
+     * @return a mystery
+     * @throws PackageException in case of any other error.
      */
     public abstract Path makeTempDir(String prefix)
             throws PackageException;
@@ -75,6 +88,10 @@ public abstract class Storage
      * The key is computed based on the package abbrev, and is unique.
      * Typically it is used to create a directory or a collection, which
      * requires to have a unique string without '/'.
+     *
+     * @param key the unique key
+     * @return true if there is a unique key.
+     * @throws PackageException in case of any other error.
      */
     public abstract boolean packageKeyExists(String key)
             throws PackageException;
@@ -89,18 +106,28 @@ public abstract class Storage
      * It can rename the directory to its final place (does not need to copy
      * it). If it is not using the temporary directory anymore, it must delete
      * it.
+     *
+     * @param key the unique key
+     * @param dir dir
+     * @param pkg pkg
+     * @throws PackageException in case of any other error.
      */
     public abstract void storeInstallDir(Path dir, String key, Package pkg)
             throws PackageException;
 
     /**
      * The package has just been install, record the information if needed.
+     *
+     * @param pkg pkg
+     * @throws PackageException in case of any other error.
      */
     public abstract void updatePackageLists(Package pkg)
             throws PackageException;
 
     /**
      * TODO: ...
+     * @param pkg pkg
+     * @throws PackageException in case of any other error.
      */
     public abstract void remove(Package pkg)
             throws PackageException;

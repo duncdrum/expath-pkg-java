@@ -26,8 +26,9 @@ public interface UserInteractionStrategy
      *
      * @param msg
      *      The message to display.
+     * @throws PackageException in case of errors
      */
-    public void messageInfo(String msg)
+    void messageInfo(String msg)
             throws PackageException;
 
     /**
@@ -35,8 +36,9 @@ public interface UserInteractionStrategy
      *
      * @param msg
      *      The message to display.
+     * @throws PackageException in case of errors
      */
-    public void messageError(String msg)
+    void messageError(String msg)
             throws PackageException;
 
     /**
@@ -44,8 +46,9 @@ public interface UserInteractionStrategy
      *
      * @param msg
      *      The log message.
+     *  @throws PackageException in case of errors
      */
-    public void logInfo(String msg)
+    void logInfo(String msg)
             throws PackageException;
 
     /**
@@ -56,11 +59,12 @@ public interface UserInteractionStrategy
      *
      * @param dflt
      *      The default value to propose.
+     * @throws PackageException in case of errors
      *
      * @return
      *      The value the user has given.
      */
-    public boolean ask(String prompt, boolean dflt)
+    boolean ask(String prompt, boolean dflt)
             throws PackageException;
 
     /**
@@ -72,10 +76,11 @@ public interface UserInteractionStrategy
      * @param dflt
      *      The default value to propose.
      *
+     * @throws PackageException in case of errors
      * @return
      *      The value the user has given.
      */
-    public String ask(String prompt, String dflt)
+    String ask(String prompt, String dflt)
             throws PackageException;
 }
 

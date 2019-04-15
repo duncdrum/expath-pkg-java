@@ -33,6 +33,8 @@ public abstract class UpdatableXmlFile
 {
     /**
      * Create a new instance.
+     * @param file the xml file
+     * @throws PackageException in case of errors
      */
     public UpdatableXmlFile(Path file)
             throws PackageException
@@ -42,6 +44,9 @@ public abstract class UpdatableXmlFile
 
     /**
      * Compile a stylesheet.
+     * @param rsrc_name remote source name
+     * @return a stylesheet
+     * @throws PackageException in case of errors
      */
     protected Transformer compile(String rsrc_name)
             throws PackageException
@@ -65,6 +70,8 @@ public abstract class UpdatableXmlFile
 
     /**
      * Transform the file with the transformer.
+     * @throws PackageException in case of errors
+     * @param trans transformer
      */
     protected void transform(Transformer trans)
             throws PackageException

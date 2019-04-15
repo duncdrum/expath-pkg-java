@@ -26,8 +26,12 @@ public interface PkgComponentHandler
      * 
      * This handler has to have been registered for the element it handles in
      * the {@code Repository}.
+     * @param pkg pkg
+     * @param helper helper
+     * @param parser parser
+     * @throws PackageException in case of error
      */
-    public void handleDescription(XMLStreamReader parser, Package pkg, XMLStreamHelper helper)
+    void handleDescription(XMLStreamReader parser, Package pkg, XMLStreamHelper helper)
             throws PackageException;
 }
 
